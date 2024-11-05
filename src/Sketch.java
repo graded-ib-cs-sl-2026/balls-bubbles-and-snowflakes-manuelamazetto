@@ -1,3 +1,5 @@
+
+
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
@@ -15,7 +17,8 @@ public class Sketch extends PApplet {
     private Snowflake snowflake2;
     private Snowflake snowflake3;
     private Snowflake snowflake4;
-    private int p = 0;
+    int score = 0;
+    int time = 0;
 
     /**
      * This method can only be used to change the window size. It runs before the
@@ -64,6 +67,7 @@ public class Sketch extends PApplet {
      * movement.
      */
     public void draw() {
+        time = (int)(frameCount / frameRate);
         background(180, 180, 255);
         ball1.draw();
         ball1.move();
@@ -92,12 +96,49 @@ public class Sketch extends PApplet {
         snowflake4.draw();
         snowflake4.move();
 
-
-    if (mouseX == x.ball1 && mouseY == y.ball1) {
-        p = p + 2;
-    }else {
+        fill(0);
+        textSize(20);
+        text("Score: " + score, 10, 30);
 
     }
+    public void mousePressed(){
+        if (ball1.isClicked(mouseX, mouseY)){
+            score = score + 1;
+            ball1.changeParameters(random(0, 500), random(0, 500));
+        }else if (ball2.isClicked(mouseX, mouseY)){
+            score = score + 1;
+            ball2.changeParameters(random(0, 500), random(0, 500));
+        }else if (ball3.isClicked(mouseX, mouseY)){
+            score = score + 1;
+            ball3.changeParameters(random(0, 500), random(0, 500));
+        }else if (ball4.isClicked(mouseX, mouseY)){
+            score = score + 1;
+            ball4.changeParameters(random(0, 500), random(0, 500));
+        }else if (bubble1.isClicked(mouseX, mouseY)){
+            score = score + 2;
+            bubble1.changeParameters(random(0, 500), 490); 
+        }else if (bubble2.isClicked(mouseX, mouseY)){
+            score = score + 2;
+            bubble2.changeParameters(random(0, 500), 490); 
+        }else if (bubble3.isClicked(mouseX, mouseY)){
+            score = score + 2;
+            bubble3.changeParameters(random(0, 500), 490); 
+        }else if (bubble4.isClicked(mouseX, mouseY)){
+            score = score + 2;
+            bubble4.changeParameters(random(0, 500), 490); 
+        }else if (snowflake1.isClicked(mouseX, mouseY)){
+            score = score - 1;
+            snowflake1.changeParameters(random(0, 500), 10); 
+        }else if (snowflake2.isClicked(mouseX, mouseY)){
+            score = score - 1;
+            snowflake2.changeParameters(random(0, 500), 10); 
+        }else if (snowflake3.isClicked(mouseX, mouseY)){
+            score = score - 1;
+            snowflake3.changeParameters(random(0, 500), 10); 
+        }else if (snowflake4.isClicked(mouseX, mouseY)){
+            score = score - 1;
+            snowflake4.changeParameters(random(0, 500), 10); 
+        }
     }
     /** All processing sketches have to use this main method. Don't touch this! */
     public static void main(String[] args) {

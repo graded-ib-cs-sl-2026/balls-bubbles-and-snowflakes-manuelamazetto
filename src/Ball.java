@@ -70,6 +70,11 @@ class Ball {
         fillColor = fill;
     }
 
+    public void changeParameters(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
+
     /**
      * Draws the ball on the given sketch
      */
@@ -91,6 +96,13 @@ class Ball {
         if (y > s.height - radius || y < radius) {
             ySpeed = -ySpeed;
         }
+    }
+
+
+    
+
+    boolean isClicked(float mx, float my){
+        return x + radius >= mx && x - radius <= mx && y + radius >= my && y - radius <= my;
     }
 
 }

@@ -34,6 +34,11 @@ class Bubble {
        
 
     }
+    public void changeParameters(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
+
 
  public float getRadius() {
     return radius;
@@ -73,6 +78,8 @@ public void move() {
     } else if (y < radius) {
         y = s.height - radius;
     }
+}boolean isClicked(float mx, float my){
+    return x + radius >= mx && x - radius <= mx && y + radius >= my && y - radius <= my;
 }
 }
 
