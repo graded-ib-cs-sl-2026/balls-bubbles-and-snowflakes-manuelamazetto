@@ -9,7 +9,7 @@ class Snowflake {
     private float ySpeed;
     private int strokeColor;
 
-    public Snowflake(Sketch sketch){
+    public Snowflake(Sketch sketch) {
         s = sketch;
         radius = 20;
         x = 100;
@@ -17,68 +17,76 @@ class Snowflake {
         xSpeed = 2;
         ySpeed = -1;
         strokeColor = s.color(0, 0, 0);
-    
+
     }
 
-    public Snowflake(Sketch sketch, float radius, float x, float y, float xSpeed, float ySpeed){
+    public Snowflake(Sketch sketch, float radius, float x, float y, float xSpeed, float ySpeed) {
         this.s = sketch;
         this.radius = radius;
         this.x = x;
         this.y = y;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
-       
 
     }
-    public void changeParameters(float x, float y){
+
+    public void changeParameters(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
+    public float getRadius() {
+        return radius;
+    }
 
- public float getRadius() {
-    return radius;
-}
+    public float getDiameter() {
+        return radius * 2;
+    }
 
-public float getDiameter() {
-    return radius * 2;
-}
+    public float getX() {
+        return x;
+    }
 
-public float getX() {
-    return x;
-}
+    public float getY() {
+        return y;
+    }
 
-public float getY() {
-    return y;
-}
-public void setColors(int border) {
-    strokeColor = border;
-}
+    public void setColors(int border) {
+        strokeColor = border;
+        /* There isn't a fill option because the snowflake is just lines so the fill option would be completely useless */
+    }
 
     public void draw() {
         s.stroke(strokeColor);
         s.line(x + radius, y, x - radius, y);
         s.line(x, y + radius, x, y - radius);
         s.line(x + radius * .707f, y + radius * .707f,
-               x - radius * .707f, y - radius * .707f);
+                x - radius * .707f, y - radius * .707f);
         s.line(x + radius * .707f, y - radius * .707f,
-               x - radius * .707f, y + radius * .707f);
+                x - radius * .707f, y + radius * .707f);
 
     }
+
     public void move() {
-        x = x + xSpeed;
-        y = y + ySpeed;
+        x = x - xSpeed;
+        y = y - ySpeed;
+        /*
+         * These are minus xSpeed and minus ySpeed instead of plus (like in bubble)
+         * because the snowflake has to go from the bottom to the top instead of the
+         * other way around
+         */
         if (x > s.width - radius) {
             x = radius;
-        } else if(x < radius) {
+        } else if (x < radius) {
             x = s.width - radius;
         } else if (y > s.height - radius) {
             y = radius;
         } else if (y < radius) {
             y = s.height - radius;
+        }
     }
-}boolean isClicked(float mx, float my){
-    return x + radius >= mx && x - radius <= mx && y + radius >= my && y - radius <= my;
-}
-}
 
+    boolean isClicked(float mx, float my) {
+        return x + radius >= mx && x - radius <= mx && y + radius >= my && y - radius <= my;
+    }
+}
